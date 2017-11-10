@@ -38,8 +38,6 @@
            });
 
            SongPlayer.currentSong = song;
-           console.log(SongPlayer.currentSong);
-           console.log(SongPlayer.currentSong.title);
          };
 
 
@@ -86,6 +84,14 @@
          * @type {Object}
          */
          SongPlayer.currentSong = null;
+
+
+
+         /**
+         * @desc Current playback time (in seconds) of currently playing song
+         * @type {Number}
+         */
+         SongPlayer.currentTime = null;
 
 
 
@@ -158,6 +164,20 @@
 
 
          };
+
+
+
+         /**
+         * @function setCurrentTime
+         * @desc Set current time (in seconds) of currently playing song
+         * @param {Number} time
+         */
+         SongPlayer.setCurrentTime = function(time) {
+             if (currentBuzzObject) {
+                 currentBuzzObject.setTime(time);
+             }
+         };
+
 
          return SongPlayer;
      }
