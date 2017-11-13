@@ -20,6 +20,25 @@
          var currentBuzzObject = null;
 
 
+         /**
+         * @desc Active song object from list of songs
+         * @type {Object}
+         */
+         SongPlayer.currentSong = null;
+
+         /**
+         * @desc Current playback time (in seconds) of currently playing song
+         * @type {Number}
+         */
+         SongPlayer.currentTime = null;
+
+         /**
+         * @desc Current volume of the song player
+         * @type {Number}
+         */
+         SongPlayer.volume = 50;
+
+
 
          /**
          * @function setSong
@@ -40,6 +59,13 @@
            currentBuzzObject.bind('timeupdate', function() {
                $rootScope.$apply(function() {
                   SongPlayer.currentTime = currentBuzzObject.getTime();
+               });
+            });
+
+
+            currentBuzzObject.bind('volumechange', function() {
+               $rootScope.$apply(function() {
+                  SongPlayer.volume = currentBuzzObject.getVolume();
                });
             });
 
@@ -84,21 +110,6 @@
          var getSongIndex = function(song) {
             return currentAlbum.songs.indexOf(song);
          };
-
-
-         /**
-         * @desc Active song object from list of songs
-         * @type {Object}
-         */
-         SongPlayer.currentSong = null;
-
-
-
-         /**
-         * @desc Current playback time (in seconds) of currently playing song
-         * @type {Number}
-         */
-         SongPlayer.currentTime = null;
 
 
 
@@ -186,6 +197,17 @@
          };
 
 
+
+         /**
+         * @function SongPlayer.setVolume
+         * @desc Change the volume of the song player.
+         * @param {Object} song
+         */
+         SongPlayer.setVolume = function(volume) {
+            if (currentBuzzObject) {
+               currentBuzzObject.setVolume(volume);
+            }
+         };
          return SongPlayer;
      }
 
