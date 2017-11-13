@@ -55,15 +55,11 @@
             scope.onClickSeekBar = function(event) {
                var percent = calculatePercent(seekBar, event);
                scope.value = percent * scope.max;
-               console.log("ClickBar notifyOnChange are you working?");
                notifyOnChange(scope.value);
-               console.log(scope.value);
             };
 
             scope.trackThumb = function() {
-               console.log("trackThumb are you working?");
                $document.bind('mousemove.thumb', function(event) {
-                  console.log("$document.bind are you working?");
                   var percent = calculatePercent(seekBar, event);
                   scope.$apply(function() {
                      scope.value = percent * scope.max;
